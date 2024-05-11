@@ -1,7 +1,7 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-05-03 14:36:31
- * @LastEditTime: 2024-05-06 15:00:13
+ * @LastEditTime: 2024-05-12 03:22:15
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\config\config.default.ts
@@ -10,6 +10,8 @@
 
 import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
 import path = require('path');
+import { StudentInfo } from '../entity/studentInfo';
+import { Login } from '../entity/login';
 
 export default (appInfo: MidwayAppInfo) => {
   return {
@@ -21,10 +23,14 @@ export default (appInfo: MidwayAppInfo) => {
     // security: {
     //   csrf: false,
     // },
+    webSocket: {
+      // port: 7001,
+    },
     orm: {
       type: 'sqlite',
+      entities: [StudentInfo, Login],
       database: path.join(__dirname, '../../sql/class_detection_db.db'),
-      synchronize: true,
+      synchronize: false,
       logging: true,
     },
   } as MidwayConfig;
