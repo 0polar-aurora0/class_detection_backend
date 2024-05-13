@@ -11,7 +11,7 @@
 import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
 import path = require('path');
 import { StudentInfo } from '../entity/studentInfo';
-import { Login } from '../entity/login';
+import { UserInfo } from '../entity/userInfo';
 
 export default (appInfo: MidwayAppInfo) => {
   return {
@@ -28,7 +28,7 @@ export default (appInfo: MidwayAppInfo) => {
     },
     orm: {
       type: 'sqlite',
-      entities: [StudentInfo, Login],
+      entities: [StudentInfo, UserInfo],
       database: path.join(__dirname, '../../sql/class_detection_db.db'),
       synchronize: false,
       logging: true,

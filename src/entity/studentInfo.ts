@@ -1,7 +1,7 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-05-09 15:55:27
- * @LastEditTime: 2024-05-09 17:48:53
+ * @LastEditTime: 2024-05-12 22:03:43
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\entity\studentInfo.ts
@@ -10,7 +10,7 @@
 import { EntityModel } from '@midwayjs/orm';
 import { Column, PrimaryColumn } from 'typeorm';
 
-@EntityModel()
+@EntityModel('studentInfo')
 export class StudentInfo {
   @PrimaryColumn()
   id: string;

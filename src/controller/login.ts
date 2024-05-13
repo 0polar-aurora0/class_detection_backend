@@ -1,26 +1,65 @@
-import { Inject, Controller, Post, Query, Context } from '@midwayjs/core';
+/*
+ * @Author: fuzhenghao
+ * @Date: 2024-05-12 03:13:39
+ * @LastEditTime: 2024-05-13 12:01:51
+ * @LastEditors: fuzhenghao
+ * @Description:
+ * @FilePath: \class_detection_backend\src\controller\login.ts
+ */
+import {
+  Inject,
+  Controller,
+  Post,
+  // Query,
+  Context,
+  Body,
+  // ContentType,
+  // HttpCode,
+} from '@midwayjs/core';
 
-import { IGetLoginResponse } from '../interface';
+// import { IGetLoginResponse } from '../interface';
 import { LoginService } from '../service/loginService/login';
 
-@Controller('/login')
+@Controller('/loginRequest')
 export class LoginController {
   @Inject()
   ctx: Context;
 
   @Inject()
   loginService: LoginService;
-  IGetLoginResponse;
 
+  // @ContentType('application/json')
+  // @HttpCode(403)
   @Post('/loginPost')
-  async postStudentInfo(
-    @Query('username') username: string
-  ): Promise<IGetLoginResponse> {
-    // const user = id
-    //   ? await this.studentInfoService.getStudentInfo(id)
-    //   : await this.studentInfoService.getStudentInfoAll();
+  async loginPost(
+    // @Query('username') username: any,
+    @Body() body
+  ): Promise<any> {
+    // console.log({ username });
+    console.log({ body });
+    let { username, password } = body;
     const userInfo = await this.loginService.getLoginInfoByUser(username);
-    console.log({ userInfo });
-    return { success: true, resCode: 10000, message: 'OK', data: true };
+    console.log({ userInfo, password, aa: userInfo?.password });
+    console.log(userInfo?.password === password);
+    if (userInfo) {
+      if (userInfo?.password && !(userInfo.password === password)) {
+        return {
+          resCode: 9002,
+          resMes: '登录失败，密码错误',
+        };
+      } else {
+        return {
+          resCode: 10000,
+          resMes: '登录成功',
+        };
+      }
+    } else {
+      return {
+        resCode: 9001,
+        resMes: '登录失败，账号不存在',
+      };
+    }
+    // body.resCode = 10000;
+    // body.resMes = '登录成功';
   }
 }

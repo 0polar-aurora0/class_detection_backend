@@ -1,7 +1,7 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-04-30 23:20:19
- * @LastEditTime: 2024-05-09 16:47:59
+ * @LastEditTime: 2024-05-13 11:21:19
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\controller\studentInfo.ts
@@ -11,7 +11,7 @@ import { Inject, Controller, Post, Query, Context } from '@midwayjs/core';
 import { IGetStudentInfoResponse } from '../interface';
 import { StudentInfoService } from '../service/studentInfoService/studentInfo';
 
-@Controller('/studentInfo')
+@Controller('/studentInfoRequest')
 export class StudentInfoController {
   @Inject()
   ctx: Context;

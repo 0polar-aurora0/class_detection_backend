@@ -9,7 +9,10 @@ export interface IGetStudentInfoResponse extends commonResponse {
 }
 
 export interface IGetLoginResponse extends commonResponse {
-  data: boolean;
+  data: {
+    loginSuccess: boolean;
+    message?: string;
+  };
 }
 
 /**
