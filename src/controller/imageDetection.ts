@@ -27,6 +27,8 @@ export class DetectionController {
     // stop node detection, use python server detection
     // this.detectionService.detect();
     // this.imageService.saveImage;
+    console.log(this.ctx);
+
     return { result: true };
   }
 }
