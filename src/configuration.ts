@@ -1,7 +1,7 @@
 /*
- * @Author: fuzhenghao
+ * @Author: wanglinxiang
  * @Date: 2024-04-30 23:20:19
- * @LastEditTime: 2024-05-09 17:35:00
+ * @LastEditTime: 2024-05-14 14:58:19
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\configuration.ts
@@ -11,6 +11,7 @@ import { join } from 'path';
 import * as ws from '@midwayjs/ws';
 import * as egg from '@midwayjs/web';
 import * as orm from '@midwayjs/orm';
+// import * as staticFile from '@midwayjs/static-file';
 // import * as socketio from '@midwayjs/socketio';
 
 @Configuration({

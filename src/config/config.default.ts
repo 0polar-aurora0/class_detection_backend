@@ -1,7 +1,7 @@
 /*
- * @Author: fuzhenghao
+ * @Author: wanglinxiang
  * @Date: 2024-05-03 14:36:31
- * @LastEditTime: 2024-05-12 03:22:15
+ * @LastEditTime: 2024-05-14 15:12:20
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\config\config.default.ts
@@ -33,5 +33,15 @@ export default (appInfo: MidwayAppInfo) => {
       synchronize: false,
       logging: true,
     },
+   
+    // 静态服务器托管配置
+    // staticFile: {
+    //   dirs: {
+    //     default: {
+    //       prefix: '/',
+    //       dir: 'xxx',
+    //     },
+    //   }
+    // },
   } as MidwayConfig;
 };

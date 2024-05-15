@@ -1,8 +1,8 @@
 /*
- * @Author: fuzhenghao
+ * @Author: wanglinxiang
  * @Date: 2024-05-06 16:57:26
  * @LastEditTime: 2024-05-06 17:42:46
- * @LastEditors: fuzhenghao
+ * @LastEditors: wanglinxiang
  * @Description:
  * @FilePath: \class_detection_backend\src\service\studentInfoService\mock.ts
  */

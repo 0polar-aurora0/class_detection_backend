@@ -1,8 +1,8 @@
 /*
- * @Author: fuzhenghao
+ * @Author: wanglinxiang
  * @Date: 2024-05-09 15:55:27
  * @LastEditTime: 2024-05-12 22:03:43
- * @LastEditors: fuzhenghao
+ * @LastEditors: wanglinxiang
  * @Description:
  * @FilePath: \class_detection_backend\src\entity\studentInfo.ts
  */

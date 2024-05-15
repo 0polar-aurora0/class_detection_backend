@@ -1,3 +1,11 @@
+/*
+ * @Author: fuzhenghao
+ * @Date: 2024-05-02 01:06:12
+ * @LastEditTime: 2024-05-13 23:43:56
+ * @LastEditors: fuzhenghao
+ * @Description: 
+ * @FilePath: \class_detection_backend\webpack.config.js
+ */
 const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
 const nodeExternals = require('webpack-node-externals');
@@ -19,11 +27,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new CopyPlugin({
-            patterns: [
-                { from: 'model.onnx', to: 'model.onnx' },
-            ]
-        })
+        // new CopyPlugin({
+        //     patterns: [
+        //         { from: 'model.onnx', to: 'model.onnx' },
+        //     ]
+        // })
     ],
     externals: [
         nodeExternals(),

@@ -10,11 +10,15 @@
     "@midwayjs/logger": "^3.1.0",
     "@midwayjs/orm": "^3.4.3",
     "@midwayjs/socketio": "3",
+    "@midwayjs/static-file": "3",
     "@midwayjs/typeorm": "3",
     "@midwayjs/web": "^3.12.0",
     "@midwayjs/ws": "3",
     "egg": "^2.0.0",
+    "egg-static": "^2.3.1",
+    "image-js": "^0.35.5",
     "mdl-gen-midway": "0.4.10",
+    "node-opencv": "^0.0.2-security",
     "onnxruntime-node": "^1.17.3-rev.1",
     "sqlite3": "^5.1.7",
     "typeorm": "^0.3.20"
@@ -51,5 +55,12 @@
     "url": ""
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "opencv4nodejs": {
+    "disableAutoBuild": 1,
+    "opencvIncludeDir": "F:\\opencv\\opencv\\build\\include",
+    "opencvLibDir": "F:\\opencv\\opencv\\build\\x64\\vc16\\lib",
+    "opencvBinDir": "F:\\opencv\\opencv\\build\\x64\\vc16\\bin",
+    "autoBuildOpencvVersion": "4.6.0"
+  }
 }

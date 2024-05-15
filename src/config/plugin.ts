@@ -1,4 +1,5 @@
 import { EggPlugin } from 'egg';
 export default {
-  // static: false,
+  //开启静态文件托管
+  static: true,
 } as EggPlugin;

@@ -1,8 +1,8 @@
 /*
- * @Author: fuzhenghao
+ * @Author: wanglinxiang
  * @Date: 2024-04-30 23:20:19
  * @LastEditTime: 2024-05-07 00:47:19
- * @LastEditors: fuzhenghao
+ * @LastEditors: wanglinxiang
  * @Description: 
  * @FilePath: \class_detection_backend\src\controller\home.ts
  */
