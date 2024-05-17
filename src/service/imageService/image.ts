@@ -1,7 +1,7 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-05-09 15:49:11
- * @LastEditTime: 2024-05-16 01:17:03
+ * @LastEditTime: 2024-05-16 23:22:02
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\service\imageService\image.ts
@@ -10,6 +10,8 @@ import path = require('path');
 const fs = require('fs');
 import { Provide } from '@midwayjs/core';
 import { uuid } from '../../utils/uuid';
+import { staticPosition } from '../../config/static';
+
 // import { base64Handle } from '../../utils/data';
 
 @Provide()
@@ -32,7 +34,7 @@ export class ImageService {
     // );
 
     //project position
-    const staticPosition = 'K:/class_detection_backend/src/app/public';
+
     const imagePathName = path.join(
       staticPosition,
       `${imageName || uuid(10)}.jpg`

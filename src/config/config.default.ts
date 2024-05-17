@@ -1,15 +1,15 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-05-03 14:36:31
- * @LastEditTime: 2024-05-14 15:12:20
+ * @LastEditTime: 2024-05-16 23:19:40
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\config\config.default.ts
  */
 // src/config/config.default.ts
 
-import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
 import path = require('path');
+import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
 import { StudentInfo } from '../entity/studentInfo';
 import { UserInfo } from '../entity/userInfo';
 
@@ -33,8 +33,8 @@ export default (appInfo: MidwayAppInfo) => {
       synchronize: false,
       logging: true,
     },
-   
-    // 静态服务器托管配置
+
+    // koa静态服务器托管配置
     // staticFile: {
     //   dirs: {
     //     default: {
@@ -45,3 +45,5 @@ export default (appInfo: MidwayAppInfo) => {
     // },
   } as MidwayConfig;
 };
+
+
