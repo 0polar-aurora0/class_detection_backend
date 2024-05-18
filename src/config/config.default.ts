@@ -1,7 +1,7 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-05-03 14:36:31
- * @LastEditTime: 2024-05-16 23:19:40
+ * @LastEditTime: 2024-05-18 18:37:53
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\config\config.default.ts
@@ -12,6 +12,7 @@ import path = require('path');
 import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
 import { StudentInfo } from '../entity/studentInfo';
 import { UserInfo } from '../entity/userInfo';
+import { ImageDetectionResult } from '../entity/imageDetectionResult';
 
 export default (appInfo: MidwayAppInfo) => {
   return {
@@ -28,7 +29,7 @@ export default (appInfo: MidwayAppInfo) => {
     },
     orm: {
       type: 'sqlite',
-      entities: [StudentInfo, UserInfo],
+      entities: [StudentInfo, UserInfo, ImageDetectionResult],
       database: path.join(__dirname, '../../sql/class_detection_db.db'),
       synchronize: false,
       logging: true,
@@ -45,5 +46,3 @@ export default (appInfo: MidwayAppInfo) => {
     // },
   } as MidwayConfig;
 };
-
-

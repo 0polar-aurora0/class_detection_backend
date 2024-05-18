@@ -1,7 +1,7 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-05-15 21:56:27
- * @LastEditTime: 2024-05-18 01:22:33
+ * @LastEditTime: 2024-05-19 02:03:01
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\service\detectPythonService\fetchGet.ts
@@ -11,7 +11,6 @@ import {
   IDetectResponseByserver,
   TDetectData,
   TDetectTargetInfo,
-  TImageInfo,
   TPercentInfo,
 } from '../../interface';
 import { name_CN } from '../../config/static';
@@ -33,7 +32,7 @@ export class DetectPythonService {
 
   async dataHandle(
     response: IDetectResponseByserver,
-    imageInfo: TImageInfo
+    imageName: string
   ): Promise<TDetectData> {
     let {
       choose_list,
@@ -44,10 +43,11 @@ export class DetectPythonService {
       target_nums,
     } = response;
     let resData: TDetectData = {
-      imageInfo: undefined,
+      imageName: '',
       detectTargetList: [],
       percentList: [],
       totalTargetNum: 0,
+      timeInfo: undefined,
     };
     let detectTargetList: Array<TDetectTargetInfo> = [];
     let percentList: Array<TPercentInfo> = [];
@@ -61,12 +61,14 @@ export class DetectPythonService {
         chooseName: '',
         corporationList: [],
         confidence: '',
-        type: '',
+        // type: '',
+        type_value: 0,
       };
       detectTarget.confidence = conf_list[index];
       detectTarget.chooseName = choose_list[index + 1];
       detectTarget.corporationList = location_list[index];
-      detectTarget.type = name_CN[cls_list[index]];
+      // detectTarget.type = name_CN[cls_list[index]];
+      detectTarget.type_value = cls_list[index];
       detectTargetList.push(detectTarget);
       let position = location_list[index];
       detectTarget.corporation_x_min = position[0];
@@ -87,7 +89,8 @@ export class DetectPythonService {
     resData.detectTargetList = detectTargetList;
     resData.percentList = percentList;
     resData.totalTargetNum = target_nums;
-    resData.imageInfo = imageInfo;
+    resData.imageName = imageName;
+    console.log({ aaa: resData.imageName });
 
     return resData;
   }

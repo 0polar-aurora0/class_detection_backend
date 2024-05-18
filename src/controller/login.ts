@@ -1,8 +1,8 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-05-12 03:13:39
- * @LastEditTime: 2024-05-13 12:01:51
- * @LastEditors: wanglinxiang
+ * @LastEditTime: 2024-05-19 03:05:45
+ * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\controller\login.ts
  */
@@ -36,8 +36,8 @@ export class LoginController {
     @Body() body
   ): Promise<any> {
     // console.log({ username });
-    console.log({ body });
     let { username, password } = body;
+    console.log({ body });
     const userInfo = await this.loginService.getLoginInfoByUser(username);
     console.log({ userInfo, password, aa: userInfo?.password });
     console.log(userInfo?.password === password);
@@ -61,5 +61,32 @@ export class LoginController {
     }
     // body.resCode = 10000;
     // body.resMes = '登录成功';
+  }
+
+  @Post('/logiRegesterPost')
+  async logiRegesterPost(@Body() body): Promise<any> {
+    console.log({ body });
+    let { username, password } = body;
+    let loginRegisterForm = {
+      username,
+      password,
+    };
+    let result = await this.loginService
+      .getUsernameExits(loginRegisterForm)
+      .then(async exits => {
+        if (exits) {
+          await this.loginService.loginRegister({ username, password });
+          return {
+            resCode: 9003,
+            resMes: '用户名已存在',
+          };
+        } else {
+          return {
+            resCode: 10000,
+            resMes: '注册成功',
+          };
+        }
+      });
+    return result;
   }
 }

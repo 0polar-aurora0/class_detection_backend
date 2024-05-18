@@ -29,7 +29,8 @@ export interface TDetectTargetInfo {
   chooseName: string;
   corporationList: Array<number>;
   confidence: string | number;
-  type: string;
+  // type: string;
+  type_value: number;
   corporation_x_min: number;
   corporation_y_min: number;
   corporation_x_max: number;
@@ -40,13 +41,15 @@ export interface TPercentInfo {
   value: number;
 }
 
-export interface TImageInfo {
-  imageName: string;
-  imageBase64?: any;
+export interface TTimeInfo {
+  timeStart: any;
+  timeEnd: any;
+  timeSpend?: any;
 }
 
 export interface TDetectData {
-  imageInfo: TImageInfo;
+  imageName: string;
+  timeInfo?: TTimeInfo;
   detectTargetList: Array<TDetectTargetInfo>;
   percentList: Array<TPercentInfo>;
   totalTargetNum: number;

@@ -1,17 +1,19 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-05-16 23:19:47
- * @LastEditTime: 2024-05-16 23:19:47
+ * @LastEditTime: 2024-05-19 03:26:18
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\config\static.ts
  */
 
-import path = require('path');
+// import path = require('path');
 
 //python detect server config
 export const detectionServer = 'http://127.0.0.1:7020/detect';
-export const staticPosition = path.join(__dirname, '../app/public');
+//static file service storage position
+// export const staticPosition = path.join(__dirname, '../app/public');
+export const staticPosition = `K:/class_detection_backend/src/app/public`;
 export const name_CN = [
   '举手',
   '阅读',
@@ -28,3 +30,8 @@ export const names_EN = [
   'bowing the head',
   'leaning over the table',
 ];
+export const studentDefaultMock = {
+  id: '78592',
+  student_id: '111122223333',
+  avator: null,
+};
