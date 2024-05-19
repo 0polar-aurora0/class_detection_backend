@@ -1,7 +1,7 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-05-12 03:14:10
- * @LastEditTime: 2024-05-18 21:15:39
+ * @LastEditTime: 2024-05-19 17:04:21
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\service\loginService\login.ts
@@ -47,7 +47,6 @@ export class LoginService {
     return await this.UserModel.existsBy({
       username: loginRegisterForm.username,
     }).then(username_exists => {
-      console.log({ username_exists });
       return username_exists;
     });
   }

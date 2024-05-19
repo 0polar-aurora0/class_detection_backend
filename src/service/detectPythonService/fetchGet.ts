@@ -1,7 +1,7 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-05-15 21:56:27
- * @LastEditTime: 2024-05-19 02:03:01
+ * @LastEditTime: 2024-05-19 16:55:42
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\service\detectPythonService\fetchGet.ts
@@ -90,7 +90,6 @@ export class DetectPythonService {
     resData.percentList = percentList;
     resData.totalTargetNum = target_nums;
     resData.imageName = imageName;
-    console.log({ aaa: resData.imageName });
 
     return resData;
   }

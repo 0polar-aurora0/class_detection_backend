@@ -1,7 +1,7 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-05-07 13:30:42
- * @LastEditTime: 2024-05-19 03:18:21
+ * @LastEditTime: 2024-05-19 17:02:41
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\socket\detectionPythonServer.controller.ts
@@ -75,16 +75,10 @@ export class HelloSocketController {
           student_id: studentDefaultMock.student_id,
         })
         .then(async exists => {
-          console.log({exists});
           //不存在则新增一位学生
           if (!exists) {
             //配置学生信息
-            let studentInfo = {
-              id: uuid(10),
-              student_id: studentDefaultMock.student_id,
-              avator: uuid(10),
-              detection_face_feature: uuid(10),
-            };
+            let studentInfo = studentDefaultMock;
             await this.studentInfoService.InsertStudentInfo(studentInfo);
           }
         });

@@ -26,8 +26,6 @@ export class ImageDetectService {
     imageDetectResult: TDetectData,
     fixed_student_id?: string
   ) {
-    console.log({ ccc: imageDetectResult.imageName });
-
     let { detectTargetList } = imageDetectResult;
     for (let index = 0; index < detectTargetList.length; index++) {
       let imageDetectInfo = new ImageDetectionResult();

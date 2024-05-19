@@ -1,12 +1,12 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-04-30 23:20:19
- * @LastEditTime: 2024-05-13 11:21:19
- * @LastEditors: wanglinxiang
+ * @LastEditTime: 2024-05-19 18:15:44
+ * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\controller\studentInfo.ts
  */
-import { Inject, Controller, Post, Query, Context } from '@midwayjs/core';
+import { Inject, Controller, Post, Context, Body } from '@midwayjs/core';
 
 import { IGetStudentInfoResponse } from '../interface';
 import { StudentInfoService } from '../service/studentInfoService/studentInfo';
@@ -20,13 +20,42 @@ export class StudentInfoController {
   studentInfoService: StudentInfoService;
 
   @Post('/studentInfoPost')
-  async postStudentInfo(
-    @Query('id') id?: string
-  ): Promise<IGetStudentInfoResponse> {
-    // const user = id
-    //   ? await this.studentInfoService.getStudentInfo(id)
-    //   : await this.studentInfoService.getStudentInfoAll();
-    const user = await this.studentInfoService.getStudentInfoAll();
-    return { success: true, resCode: 10000, message: 'OK', data: user };
+  async postStudentInfo(@Body() body): Promise<IGetStudentInfoResponse> {
+    console.log({ body });
+
+    let studentInfoList;
+    let { current, pageSize, sorter, filter, ...others } = body;
+
+    studentInfoList = await this.studentInfoService.getStudentInfoAll({
+      ...others,
+    });
+
+    return {
+      success: true,
+      resCode: 10000,
+      message: '查询成功',
+      data: studentInfoList,
+    };
+  }
+
+  @Post('/studentInfoUpdate')
+  async updateStudentInfo(@Body() body): Promise<any> {
+    console.log({ body });
+    await this.studentInfoService.UpdateStudentInfo(body);
+    return { success: true, resCode: 10000, message: '修改成功' };
+  }
+
+  @Post('/studentInfoAdd')
+  async addStudentInfo(@Body() body): Promise<any> {
+    console.log({ body });
+    await this.studentInfoService.InsertStudentInfo(body);
+    return { success: true, resCode: 10000, message: '新增成功' };
+  }
+
+  @Post('/studentInfoDelete')
+  async deleteStudentInfo(@Body() body): Promise<any> {
+    console.log({ body });
+    await this.studentInfoService.DeleteStudentInfo(body);
+    return { success: true, resCode: 10000, message: '删除成功' };
   }
 }

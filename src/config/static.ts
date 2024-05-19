@@ -33,5 +33,6 @@ export const names_EN = [
 export const studentDefaultMock = {
   id: '78592',
   student_id: '111122223333',
-  avator: null,
+  avator: 'xregdtdgh',
+  detection_face_feature: 'fsewfsedf',
 };

@@ -1,7 +1,7 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-05-12 03:13:39
- * @LastEditTime: 2024-05-19 11:08:09
+ * @LastEditTime: 2024-05-19 19:29:14
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\controller\imageDetection.ts
@@ -48,6 +48,8 @@ export class DetectionController {
   @Post('/detectionPost')
   async detectionPost(@Files() files, @Fields() fields): Promise<any> {
     // let { data } = body;
+    console.log({ ctx: this.ctx.requestContext });
+
     console.log({ files, fields });
     let resultImageLists = [];
     let localImageInfo;
