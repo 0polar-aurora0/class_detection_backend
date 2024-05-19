@@ -1,19 +1,30 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-05-12 03:13:39
- * @LastEditTime: 2024-05-19 03:47:32
+ * @LastEditTime: 2024-05-19 11:08:09
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\controller\imageDetection.ts
  */
-import { Inject, Controller, Post, Context, Body } from '@midwayjs/core';
+import {
+  Inject,
+  Controller,
+  Post,
+  Context,
+  Body,
+  Files,
+  Fields,
+} from '@midwayjs/core';
 import { ImageService } from '../service/imageService/image';
 import { DetectPythonService } from '../service/detectPythonService/fetchGet';
 import { ImageDetectService } from '../service/imageDetectService/imageDetect';
-import { uuid } from '../utils/uuid';
-import { detectionServer } from '../config/static';
-import { get } from '../utils';
 import { StudentInfoService } from '../service/studentInfoService/studentInfo';
+import { get } from '../utils';
+import { detectionServer } from '../config/static';
+import { uuid } from '../utils/uuid';
+// import { detectionServer } from '../config/static';
+// import { get } from '../utils';
+// import { convertImageToBase64Buffer } from '../utils/data';
 // import { DetectionService } from '../service/detectionService/detection';
 // import { ImageService } from '../service/imageService/image';
 
@@ -35,40 +46,55 @@ export class DetectionController {
   studentInfoService: StudentInfoService;
 
   @Post('/detectionPost')
-  async detectionPost(@Body() body): Promise<any> {
-    let { data } = body;
-    console.log({ body });
+  async detectionPost(@Files() files, @Fields() fields): Promise<any> {
+    // let { data } = body;
+    console.log({ files, fields });
+    let resultImageLists = [];
+    let localImageInfo;
+    for (let index = 0; index < resultImageLists.length; index++) {
+      const imagePathName = resultImageLists[index].data;
 
-    let imageName = uuid(10);
-    let resultInfo = await this.imageService
-      .saveImage(data, imageName)
-      .then(imagePathName => {
-        const requestURL = `${detectionServer}?path=${imagePathName}`;
-        let res = get(requestURL);
-        return res;
-      });
-    console.log({ resultInfo });
-    if (resultInfo) {
-      //获取处理后的数据
-      let result = this.detectPythonService.dataHandle(resultInfo, imageName);
-      for (let index = 0; index < resultInfo.totalTargetNum; index++) {
-        //创建新的学生信息,不适用mockid
+      // let bufferImageData = convertImageToBase64Buffer(resultImageLists[index].data)
+      let requestURL = `${detectionServer}?path=${imagePathName}`;
+      let resultInfo = await get(requestURL);
+      if (resultInfo) {
+        //获取处理后的数据
+        let result = await this.detectPythonService.dataHandle(
+          resultInfo,
+          imagePathName
+        );
+
         let student_id = uuid(10);
-        let studentInfo = {
-          studentId: student_id,
-          id: uuid(10),
-          avator: null,
-          detection_face_feature: null,
-        };
-        //存储学生信息
-        this.studentInfoService.InsertStudentInfo(studentInfo);
-        //将图片和数据存储进数据库
-        this.imageDetectService.saveImageDetectResult(resultInfo, student_id);
-      }
-      return result;
-    }
 
-    return null;
+        //判断学生信息是否存在
+        this.studentInfoService
+          .ExistsStudentInfo({
+            student_id,
+          })
+          .then(async exists => {
+            console.log({ exists });
+            //不存在则新增一位学生
+            if (!exists) {
+              //配置学生信息
+              let studentInfo = {
+                id: uuid(10),
+                student_id,
+                avator: uuid(10),
+                detection_face_feature: uuid(10),
+              };
+              await this.studentInfoService.InsertStudentInfo(studentInfo);
+            }
+          });
+
+        //将图片和数据存储进数据库并设置默认学生数据
+        this.imageDetectService.saveImageDetectResult(result, student_id);
+        localImageInfo = result;
+      } else {
+        localImageInfo = null;
+      }
+    }
+    resultImageLists.push(localImageInfo);
+    return { resCode: 10000, resMes: '处理完毕', resultImageLists };
   }
 
   @Post('/detectionHistoryPost')

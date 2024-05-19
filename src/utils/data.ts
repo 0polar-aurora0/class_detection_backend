@@ -6,6 +6,7 @@
  * @Description:
  * @FilePath: \class_detection_backend\src\utils\data.ts
  */
+const fs = require('fs');
 
 export function base64Handle(base64Data: any) {
   // 去除base64编码的前缀得到纯编码部分
@@ -16,3 +17,15 @@ export function base64Handle(base64Data: any) {
   let buffer = Buffer.from(binaryString, 'binary');
   return buffer;
 }
+
+// Function to convert image to Base64 buffer
+export const convertImageToBase64Buffer = filePath => {
+  let base64Buffer;
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      base64Buffer = null;
+    }
+    base64Buffer = Buffer.from(data).toString('base64');
+  });
+  return base64Buffer;
+};
