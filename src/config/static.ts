@@ -14,6 +14,7 @@ export const detectionServer = 'http://127.0.0.1:7020/detect';
 //static file service storage position
 // export const staticPosition = path.join(__dirname, '../app/public');
 export const staticPosition = `K:/class_detection_backend/src/app/public`;
+export const tmpdirPosition = `K:/class_detection_backend/src/app/tmpdir`;
 export const name_CN = [
   '举手',
   '阅读',

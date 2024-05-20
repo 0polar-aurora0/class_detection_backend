@@ -1,7 +1,7 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-04-30 23:20:19
- * @LastEditTime: 2024-05-19 09:59:26
+ * @LastEditTime: 2024-05-20 16:36:07
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\configuration.ts

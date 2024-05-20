@@ -1,7 +1,7 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-05-12 03:13:39
- * @LastEditTime: 2024-05-20 15:02:19
+ * @LastEditTime: 2024-05-20 19:15:31
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\controller\imageDetection.ts
@@ -24,6 +24,7 @@ import { detectionServer, staticPosition } from '../config/static';
 import { uuid } from '../utils/uuid';
 import path = require('path');
 import fs = require('fs');
+import { fileCopy } from '../utils/file';
 const ffmpeg = require('fluent-ffmpeg');
 // import { convertImageToBase64String } from '../utils/data';
 // import { convertImageToBase64Buffer } from '../utils/data';
@@ -118,16 +119,23 @@ export class DetectionController {
     };
 
     let resultImageLists = []; //定义图片处理结果
-    let video_uuid;
+    let video_uuid = null;
     //当前设置多个文件上传处理效果
     for (let index = 0; index < files.length; index++) {
       let localFile = files[index]; //获取当前文件绝对路径
-      let imagePathName = localFile.data.replace(/\\/g, '/'); //规范文件绝对路径
-      let filename = path.basename(imagePathName); //获取文件名
-      let file_ext = path.extname(imagePathName); //获取文件扩展名
+      let file_uuid = uuid(10);
+      let image_tmp_name = localFile.data.replace(/\\/g, '/'); //临时文件绝对路径,缓存文件无法立马使用
+      // let filename = path.basename(image_tmp_name); //获取文件名
+      let file_ext = path.extname(image_tmp_name); //获取文件扩展名
+      let image_saved_name = `${staticPosition}/${file_uuid}${file_ext}`; //临时文件绝对路径
+      //在此处做文件拷贝
+      await fileCopy(image_tmp_name, image_saved_name);
 
       if (file_ext == '.jpg' || file_ext == '.png' || file_ext == '.img') {
-        resultImageLists = await imageHandle(imagePathName, filename);
+        resultImageLists = await imageHandle(
+          image_saved_name,
+          `${file_uuid}${file_ext}`
+        );
       } else if (file_ext == '.mp4') {
         //视频文件拆解
         // 使用 FFmpeg 拆分视频成为帧
@@ -137,7 +145,7 @@ export class DetectionController {
         if (!fs.existsSync(outputFolderPath)) {
           fs.mkdirSync(outputFolderPath, { recursive: true });
         }
-        await ffmpeg(imagePathName)
+        await ffmpeg(image_saved_name)
           .output(outputFolderPath) // 输出帧文件名格式
           .on('end', () => {
             console.log('拆分完成');
@@ -146,7 +154,7 @@ export class DetectionController {
             console.error('拆分出错:', err);
           })
           .run();
-
+        fs.rmdirSync(outputFolderPath);
         // 同步读取文件夹中的内容
         try {
           let files = await fs.readdirSync(videoDividStorageFileDir);
@@ -164,6 +172,8 @@ export class DetectionController {
         }
       }
     }
+    console.log({ resultImageLists });
+
     return { resCode: 10000, resMes: '处理完毕', video_uuid, resultImageLists };
   }
 

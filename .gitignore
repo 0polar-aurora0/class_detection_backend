@@ -11,4 +11,5 @@ run/
 *.un~
 .tsbuildinfo
 .tsbuildinfo.*
-src/app/public/
+src/app/public/*
+src/app/tmpdir/*

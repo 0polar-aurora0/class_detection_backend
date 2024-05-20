@@ -1,7 +1,7 @@
 /*
  * @Author: fuzhenghao
  * @Date: 2024-05-09 15:49:11
- * @LastEditTime: 2024-05-16 23:22:02
+ * @LastEditTime: 2024-05-20 16:37:31
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\service\imageService\image.ts
@@ -25,15 +25,6 @@ export class ImageService {
     if (!image) {
       console.log('erroe: you must provide an image to save');
     }
-
-    //dist position
-    // const imagePathName = path.join(
-    //   __dirname,
-    //   '../../app/public',
-    //   `${imageName || uuid(10)}.jpg`
-    // );
-
-    //project position
 
     const imagePathName = path.join(
       staticPosition,

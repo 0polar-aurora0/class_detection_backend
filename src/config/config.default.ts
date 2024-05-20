@@ -14,7 +14,7 @@ import { StudentInfo } from '../entity/studentInfo';
 import { UserInfo } from '../entity/userInfo';
 import { ImageDetectionResult } from '../entity/imageDetectionResult';
 import { uploadWhiteList } from '@midwayjs/upload';
-import { staticPosition } from './static';
+import { tmpdirPosition } from './static';
 // import { join } from 'path';
 // import { tmpdir } from 'os';
 
@@ -53,7 +53,7 @@ export default (appInfo: MidwayAppInfo) => {
       // tmpdir: string，上传的文件临时存储路径
       // tmpdir: join(tmpdir(), 'midway-upload-files'),
       //设置静态文件服务器路径
-      tmpdir: staticPosition,
+      tmpdir: tmpdirPosition,
       // cleanTimeout: number，上传的文件在临时目录中多久之后自动删除，默认为 5 分钟
       cleanTimeout: 12 * 30 * 24 * 60 * 1000, //不设置清除时间
       // base64: boolean，设置原始body是否是base64格式，默认为false，一般用于腾讯云的兼容
