@@ -35,6 +35,7 @@ export interface TDetectTargetInfo {
   corporation_y_min: number;
   corporation_x_max: number;
   corporation_y_max: number;
+  student_id?: string;
 }
 export interface TPercentInfo {
   type: string;

@@ -1,7 +1,7 @@
 /*
  * @Author: wanglinxiang
  * @Date: 2024-05-03 14:36:31
- * @LastEditTime: 2024-05-19 10:12:45
+ * @LastEditTime: 2024-05-20 15:16:55
  * @LastEditors: fuzhenghao
  * @Description:
  * @FilePath: \class_detection_backend\src\config\config.default.ts
@@ -38,6 +38,11 @@ export default (appInfo: MidwayAppInfo) => {
       synchronize: false,
       logging: true,
     },
+    static: {
+      prefix: '/public/', // 静态文件访问前缀
+      dir: path.join(appInfo.baseDir, 'app/public'), // 静态文件存储目录
+      maxAge: 12 * 30 * 24 * 60 * 1000,
+    },
     upload: {
       // mode: UploadMode, 默认为file，即上传到服务器临时目录，可以配置为 stream
       mode: 'file',
@@ -50,7 +55,7 @@ export default (appInfo: MidwayAppInfo) => {
       //设置静态文件服务器路径
       tmpdir: staticPosition,
       // cleanTimeout: number，上传的文件在临时目录中多久之后自动删除，默认为 5 分钟
-      // cleanTimeout: 5 * 60 * 1000, //不设置清除时间
+      cleanTimeout: 12 * 30 * 24 * 60 * 1000, //不设置清除时间
       // base64: boolean，设置原始body是否是base64格式，默认为false，一般用于腾讯云的兼容
       base64: true,
       // 仅在匹配路径到 /api/upload 的时候去解析 body 中的文件信息

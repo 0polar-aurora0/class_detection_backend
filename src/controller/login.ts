@@ -37,10 +37,7 @@ export class LoginController {
   ): Promise<any> {
     // console.log({ username });
     let { username, password } = body;
-    console.log({ body });
     const userInfo = await this.loginService.getLoginInfoByUser(username);
-    console.log({ userInfo, password, aa: userInfo?.password });
-    console.log(userInfo?.password === password);
     if (userInfo) {
       if (userInfo?.password && !(userInfo.password === password)) {
         return {

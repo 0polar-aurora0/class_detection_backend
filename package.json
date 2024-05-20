@@ -18,6 +18,8 @@
     "@midwayjs/ws": "3",
     "egg": "^2.0.0",
     "egg-static": "^2.3.1",
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.3",
     "image-js": "^0.35.5",
     "mdl-gen-midway": "0.4.10",
     "node-opencv": "^0.0.2-security",
